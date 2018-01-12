@@ -47,6 +47,12 @@ where em.department_id = de.department_id
 order by last_name asc;
 
 --6번문제
-
+select em.employee_id, 
+	   em.last_name, 
+	   em.hire_date, 
+	   man.manager_id
+from employees em, employees man
+where man.hire_date > em.hire_date
+      and em.manager_id = man.employee_id;
 
 
