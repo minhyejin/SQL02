@@ -11,17 +11,21 @@ where hire_date in (select max(hire_date)
 
 --2번문제
 
-select e.employee_id, 
-       e.first_name, 
-       e.last_name, 
-       j.job_title, 
-       e.salary
-from employees e , jobs j  
-where e.job_id = j.job_id 
-      and (salary) > all (select max(avg(salary))
-                          from employees 
-                          group by e.department_id)
-order by salary desc;
+select em.employee_id, 
+       em.first_name, 
+       em.last_name, 
+       em.salary, 
+       jobs.job_title
+from employees em,jobs, (select department_id 
+                         from (select department_id, avg(salary)salary 
+                               from employees 
+                               group by department_id )s1,
+                                            (select max(salary)salary 
+                                             from (select department_id , avg(salary)salary
+                                                   from employees 
+                                                   group by department_id))s2
+                         where s1.salary = s2.salary)s3
+where em.department_id = s3.department_id and em.job_id = jobs.job_id; 
 
 --3번문제
 select d.department_name
