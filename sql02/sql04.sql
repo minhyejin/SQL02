@@ -65,5 +65,14 @@ where s.avg1 = m.avg2;
 
 --5번 문제 
 
-
+select j1.job_title
+from (select em.job_id, 
+             avg(em.salary)avg1 
+      from employees em 
+      group by em.job_id)s1,
+     (select max(avg(em.salary))max1 
+      from employees em, jobs j
+      where em.job_id =j.job_id
+      group by j.job_id)s2, jobs j1
+where s1.job_id = j1.job_id and s1.avg1 = s2.max1;
       
