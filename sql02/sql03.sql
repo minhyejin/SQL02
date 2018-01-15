@@ -34,8 +34,8 @@ select e.employee_id,
        e.last_name, 
        e.salary
 from employees e, (select department_id, 
-                          avg(salary)average
+                          avg(salary)salary
                    from employees 
                    group by department_id)s
 where e.department_id = s.department_id 
-      and s.average < e.salary;
+      and s.salary < e.salary;
