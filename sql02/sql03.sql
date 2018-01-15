@@ -17,7 +17,7 @@ where (department_id,salary) in(select department_id,
                                 group by department_id)
 order by salary desc;
 
---3번문제 아직 틀림
+--3번문제 
 
 select j.job_title, 
        salary
